@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://cyberlab-nv2d.onrender.com/sitemap.xml

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="stylesheet" href="/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CYBERLAB | ACADEMIA DE CYBERSEGURIDAD</title>
+
+
+</head>
+
+
+<body>
+
+
+<!-- LOGIN -->
+
+<section id="login">
+
+<div class="login-box">
+
+<div class="logo">
+[ CYBERLAB ]
+</div>
+
+<div class="subtitle">
+ACADEMIA DE CYBERSEGURIDAD
+</div>
+
+<input
+id="username"
+type="text"
+placeholder="Usuario"
+autocomplete="off"
+>
+
+<input
+id="password"
+type="password"
+placeholder="Contraseña"
+>
+
+<button class="btn" onclick="login()">
+[ ACCEDER AL LABORATORIO ]
+</button>
+
+<p class="login-info">
+    <center>Acceso educativo — CYBERLAB</center>
+</p>
+
+<div id="loginError" class="error"></div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="hidden">
+
+<header>
+
+<div class="header-title">
+CYBERLAB // PANEL
+</div>
+
+<div class="status">
+● SISTEMA ONLINE
+</div>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- TERMINAL -->
+
+<div class="terminal">
+
+<div class="terminal-title">
+root@cyberlab:~$
+</div>
+
+<div id="terminalText"></div>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-number">
+06
+</div>
+
+<div class="stat-label">
+Módulos
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-number">
+24
+</div>
+
+<div class="stat-label">
+Lecciones
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-number">
+12
+</div>
+
+<div class="stat-label">
+Laboratorios
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-number">
+35%
+</div>
+
+<div class="stat-label">
+Progreso
+</div>
+
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+[ MÓDULOS DE APRENDIZAJE ]
+</h2>
+
+
+<div class="modules">
+
+
+<div class="module" onclick="openModule('linux')">
+
+<div class="module-icon">
+🧑‍💻
+</div>
+
+<h3>Linux Fundamentals</h3>
+
+<p>
+Comandos, archivos, procesos,
+permisos y administración básica.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('network')">
+
+<div class="module-icon">
+🌐
+</div>
+
+<h3>Network Security</h3>
+
+<p>
+Conceptos de redes, puertos,
+protocolos y diagnóstico.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('web')">
+
+<div class="module-icon">
+🛡️
+</div>
+
+<h3>Web Security</h3>
+
+<p>
+Aprende conceptos de seguridad
+en aplicaciones web.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('python')">
+
+<div class="module-icon">
+🐍
+</div>
+
+<h3>Python Security</h3>
+
+<p>
+Programación Python orientada
+a automatización defensiva.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('terminal')">
+
+<div class="module-icon">
+💻
+</div>
+
+<h3>Terminal</h3>
+
+<p>
+Practica comandos Linux desde
+un entorno educativo.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('labs')">
+
+<div class="module-icon">
+🧪
+</div>
+
+<h3>Laboratorios</h3>
+
+<p>
+Ejercicios controlados para
+practicar seguridad informática.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('progress')">
+
+<div class="module-icon">
+📊
+</div>
+
+<h3>Progreso</h3>
+
+<p>
+Consulta tu progreso dentro
+de CyberLab.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('resources')">
+
+<div class="module-icon">
+📚
+</div>
+
+<h3>Recursos</h3>
+
+<p>
+Conceptos y herramientas para
+continuar aprendiendo.
+</p>
+
+</div>
+
+
+<div class="module" onclick="openModule('about')">
+
+<div class="module-icon">
+ℹ️
+</div>
+
+<h3>Información</h3>
+
+<p>
+Información sobre el proyecto
+y uso responsable.
+</p>
+
+</div>
+
+</div>
+
+
+<footer>
+CYBERLAB // HACKING ETICO // LOCAL LAB
+</footer>
+
+</div>
+
+</section>
+
+
+<!-- CONTENT -->
+
+<section id="content" class="hidden">
+
+<div class="container">
+
+<div id="contentPage" class="content-page"></div>
+
+<button
+class="btn back"
+onclick="showDashboard()"
+>
+← VOLVER AL DASHBOARD
+</button>
+
+</div>
+
+</section>
+
+
+
+
+<script src="/script.js"></script>
+</body>
+</html>

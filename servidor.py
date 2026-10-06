@@ -27,11 +27,14 @@ class Servidor(BaseHTTPRequestHandler):
     def do_GET(self):
 
         routes = {
-            "/": ("index.html", "text/html; charset=utf-8"),
-            "/index.html": ("index.html", "text/html; charset=utf-8"),
-            "/style.css": ("style.css", "text/css; charset=utf-8"),
-            "/script.js": ("script.js", "application/javascript; charset=utf-8"),
-        }
+    "/": ("index.html", "text/html; charset=utf-8"),
+    "/index.html": ("index.html", "text/html; charset=utf-8"),
+    "/style.css": ("style.css", "text/css; charset=utf-8"),
+    "/script.js": ("script.js", "application/javascript; charset=utf-8"),
+    "/robots.txt": ("robots.txt", "text/plain; charset=utf-8"),
+    "/sitemap.xml": ("sitemap.xml", "application/xml; charset=utf-8"),
+}
+      
 
         route = routes.get(self.path)
 

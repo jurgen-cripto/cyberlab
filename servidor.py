@@ -2,58 +2,63 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 import os
 
+BASE_DIR = Path(__file__).resolve().parent
+WEB_DIR = BASE_DIR / "web"
+
 HOST = "0.0.0.0"
 PORT = int(os.environ.get("PORT", 8080))
-
-WEB_DIR = Path(__file__).parent / "web"
-
-
-def read_file(filename):
-    if filename in ("robots.txt", "sitemap.xml"):
-        return (Path(__file__).parent / filename).read_text(encoding="utf-8")
-
-    return (WEB_DIR / filename).read_text(encoding="utf-8")
 
 
 class Servidor(BaseHTTPRequestHandler):
 
-    def send_text(self, status, content, content_type="text/plain; charset=utf-8"):
-        data = content.encode("utf-8")
+    def send_file(self, file_path, content_type):
+        try:
+            data = file_path.read_bytes()
 
-        self.send_response(status)
-        self.send_header("Content-Type", content_type)
-        self.send_header("Content-Length", str(len(data)))
-        self.end_headers()
+            self.send_response(200)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
 
-        self.wfile.write(data)
+            self.wfile.write(data)
+
+        except FileNotFoundError:
+            self.send_error(404, "Recurso no encontrado")
 
     def do_GET(self):
 
-        routes = {
-            "/": ("index.html", "text/html; charset=utf-8"),
-            "/index.html": ("index.html", "text/html; charset=utf-8"),
-            "/style.css": ("style.css", "text/css; charset=utf-8"),
-            "/script.js": ("script.js", "application/javascript; charset=utf-8"),
-            "/robots.txt": ("robots.txt", "text/plain; charset=utf-8"),
-            "/sitemap.xml": ("sitemap.xml", "application/xml; charset=utf-8"),
-        }
+        if self.path in ("/", "/index.html"):
+            self.send_file(
+                WEB_DIR / "index.html",
+                "text/html; charset=utf-8"
+            )
 
-        route = routes.get(self.path)
+        elif self.path == "/style.css":
+            self.send_file(
+                WEB_DIR / "style.css",
+                "text/css; charset=utf-8"
+            )
 
-        if not route:
-            self.send_text(404, "404 - Recurso no encontrado")
-            return
+        elif self.path == "/script.js":
+            self.send_file(
+                WEB_DIR / "script.js",
+                "application/javascript; charset=utf-8"
+            )
 
-        filename, content_type = route
+        elif self.path == "/robots.txt":
+            self.send_file(
+                BASE_DIR / "robots.txt",
+                "text/plain; charset=utf-8"
+            )
 
-        try:
-            content = read_file(filename)
+        elif self.path == "/sitemap.xml":
+            self.send_file(
+                BASE_DIR / "sitemap.xml",
+                "application/xml; charset=utf-8"
+            )
 
-        except FileNotFoundError:
-            self.send_text(500, f"Falta el archivo: {filename}")
-            return
-
-        self.send_text(200, content, content_type)
+        else:
+            self.send_error(404, "Recurso no encontrado")
 
 
 if __name__ == "__main__":
